@@ -1,0 +1,59 @@
+feature,area,priority,original,clone,notes
+Home screen with personalized greeting,home,must,yes,yes,HomeScreen displays Halo + profileName
+Horizontal row of 3 built-in playlist cards,home,must,yes,yes,Fokus Santai / Semangat Pagi / Malam Tenang
+Full demo track list (16 SoundHelix tracks) with cover art and favorite toggle,home,must,yes,yes,TrackCatalogue 1..16 with Coil + gradient fallback
+Tap track to stream MP3 over HTTPS via ExoPlayer,playback,must,yes,yes,PlayerRepository backed by Media3 ExoPlayer 1.4.1
+Persistent MiniPlayer above bottom navigation across tabs,playback,must,yes,yes,MiniPlayer pinned above NavigationBar in MainActivity
+Full-screen Now Playing view with large cover and metadata,playback,must,yes,yes,NowPlayingScreen animated overlay
+Seek bar with current and total duration,playback,must,yes,yes,Slider with live polling and drag-safe seek
+Play/Pause and Next/Previous track controls,playback,must,yes,yes,Wired to ExoPlayer queue navigation
+Shuffle and Repeat (Off / All / One) toggles,playback,must,yes,yes,Mapped to ExoPlayer shuffleModeEnabled and repeatMode
+Live search filtering tracks by title and artist with Indonesian empty state,search,must,yes,yes,SearchScreen using TrackFilter.filterTracks
+Favorite heart toggle synced across Home / Search / Library / Now Playing,library,must,yes,yes,SharedPreferences StateFlow via SettingsStore
+Library screen listing built-in playlists and Favorites section,library,must,yes,yes,LibraryScreen shows Lagu Favorit + Playlist Kamu + Playlist Bawaan
+Create custom user playlist via dialog and persist locally,library,must,yes,yes,CreatePlaylistDialog persisted as JSON in SettingsStore
+Add/remove tracks to/from user playlists and view playlist detail track list,library,must,yes,yes,AddToPlaylistDialog + PlaylistDetailView remove menu
+Profile screen with editable saved display name and initial avatar,profile,should,yes,yes,ProfileScreen with circle avatar and Simpan Nama
+Profile statistics (favorites count / playlists count / tracks count) and About row,profile,should,yes,yes,StatCard row and Tentang My Playlist v1 card
+Gradient placeholder fallback when cover art loads or fails,design,should,yes,yes,CoverArt SubcomposeAsyncImage with violet gradient fallback
+White light theme (#FFFFFF) with violet accent (#6D28D9) and Indonesian UI copy,design,must,no,yes,MyPlaylistTheme lightColorScheme + Indonesian strings
+Playback error handling and buffering indicator,playback,should,yes,yes,Player.Listener error banner + CircularProgressIndicator
+JVM unit tests for search filtering and playlist logic,quality,could,no,yes,TrackFilterTest and PlaylistLogicTest
+Dibuat Untuk Kamu row (Daily Mix 1 2 Discover Mix Release Mix),home,must,yes,yes,Generated locally via MadeForYouGenerator
+Lompat Kembali recently played row on Home,home,must,yes,yes,Horizontal card carousel of recently played tracks
+Jelajahi Genre cards row & genre pages,home,must,yes,yes,GenreTileCard row leading to GenreDetailScreen
+Search tabs Semua Lagu Album Artis Playlist Genre,search,must,yes,yes,SearchTab filter chips in SearchScreen
+Recent searches persisted with Hapus riwayat pencarian,search,must,yes,yes,Stored in SettingsStore with clear action
+Browse-all genre grid when query is empty,search,must,yes,yes,2-column colorful genre grid on search screen
+Group 16 tracks into 3 albums (Helix Sessions Vol. 1 2 3),catalogue,must,yes,yes,TrackCatalogue.albums with full metadata
+Album page with cover year track list play all shuffle favorite,catalogue,must,yes,yes,AlbumDetailScreen
+Artist page with Follow toggle popular tracks discography bio,catalogue,must,yes,yes,ArtistDetailScreen with persisted follow state
+Library filter chips (Playlist Album Artis Favorit),library,must,yes,yes,LibraryFilter chips
+Library sort menu (Terbaru A-Z Paling Sering Diputar),library,must,yes,yes,LibrarySort menu using LibrarySortLogic
+Pin playlist to top (sematan di atas),library,must,yes,yes,Pinned custom playlists always sorted to top
+Rename and delete user playlists,library,must,yes,yes,RenamePlaylistDialog and delete action
+Edit playlist (remove track move up down),library,must,yes,yes,Move up down and remove track actions
+Pick 1 of 6 gradient colors for playlist cover,library,must,yes,yes,6 gradient color choices in create and color dialog
+Queue Antrean screen (Sedang Diputar Berikutnya Dari user-queued),playback,must,yes,yes,QueueScreen
+Add-to-queue and Putar Berikutnya from track menu,playback,must,yes,yes,TrackRow dropdown menu options
+Remove from queue and Bersihkan antrean,playback,must,yes,yes,Remove at index and clear queue in PlayerRepository
+Recently played persisted (max 50) and Riwayat Putar screen,history,must,yes,yes,HistoryScreen with clear-history button
+Profile stats expanded: total plays approx minutes listened top 3 tracks,profile,must,yes,yes,ProfileScreen expanded stats grid and Top 3 tracks
+Sleep timer (5 10 15 30 45 60 min akhir lagu) with active countdown,playback,must,yes,yes,SleepTimerDialog with live remaining seconds
+Equalizer intent via AudioEffect.ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL,playback,must,yes,yes,openSystemEqualizer with graceful toast fallback
+Playback speed selector (0.8 1.0 1.25 1.5) applied to ExoPlayer,playback,must,yes,yes,PlaybackSpeedDialog applied to exoPlayer.setPlaybackSpeed
+Share track and playlist via Android share intent,sharing,must,yes,yes,shareTextContent helper using Intent.ACTION_SEND
+Radio Lagu auto queue of same-genre tracks,playback,must,yes,yes,playSongRadio in PlayerRepository
+Original demo lyrics with active line highlighting by playback position,lyrics,must,yes,yes,LyricsModalSheet with Lirik demo label
+Deterministic Made-For-You local generation logic,recommendations,must,yes,yes,MadeForYouGenerator using genres and play counts
+Genre tag per track distributed across 6 genres,catalogue,should,yes,yes,Elektronik Akustik Sinematik Santai Fokus Malam
+Crossfade setting stored (0-12s) with volume ramp approximation,playback,should,yes,yes,SettingsStore crossfadeSeconds and smooth volume ramp
+Custom adaptive app icon (white bg violet play triangle and lines),design,must,yes,yes,ic_launcher_background and foreground vectors
+White splash screen overlay,design,must,yes,yes,SplashOverlay displayed for 650ms on cold start
+Stage 2 JVM unit tests for search albums artists and mixes,quality,could,no,yes,Stage2DomainLogicTest
+Podcasts and audiobooks,content,could,yes,skip,Requires licensed external RSS catalogue
+Jam Group Session and Connect to device,realtime,could,yes,skip,Requires dedicated multi-device server infrastructure
+AI DJ and AI Playlist,ai,could,yes,skip,Requires external generative AI backend
+Download mode offline,premium,must,yes,skip,Spotify Premium feature excluded per spec
+Kualitas audio sangat tinggi lossless tiers,premium,must,yes,skip,Spotify Premium feature excluded per spec
+Antrean premium controls beyond free,premium,must,yes,skip,Spotify Premium feature excluded per spec

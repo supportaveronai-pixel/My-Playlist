@@ -1,0 +1,23 @@
+STAGE 2 EXPANSION — Stephanie's update (2026-11-11 20:22 WITA): "Tambahkan SEMUA fitur yang ada di Spotify KECUALI fitur Premium, tampilan harus bagus, build di GitHub (Actions)."
+
+Do this stage AFTER the v1 core from BUILD_PROMPT.md compiles structurally, BEFORE the final push/Actions verification. Update replica/features.csv: every feature below = must (unless marked should/could), tick as built. Update BUILD_REPORT.md with a Stage-2 section + the EXCLUDED list at the bottom.
+
+MUST features (all are Spotify free-tier features, client-side implementations):
+HOME (expanded): "Dibuat Untuk Kamu" row (Daily Mix 1, Daily Mix 2, Discover Mix, Release Mix — generated locally from track genres/plays), "Lompat Kembali" (recently played), genre cards row (genre pages), keep Daftar Lagu + playlist cards.
+SEARCH (expanded): tabs Semua / Lagu / Album / Artis / Playlist / Genre; recent searches persisted with "Hapus riwayat pencarian"; browse-all genre grid when query empty.
+ALBUMS & ARTISTS: group the 16 tracks into 3 albums ("Helix Sessions Vol. 1/2/3"); Album page (cover, year "2024 (demo)", track list, play all, shuffle play, favorite album); Artist page (header, Follow/Berhenti Mengikuti toggle persisted, popular tracks sorted by play count, discography = the 3 albums, "Tentang Artis" demo bio written for this app).
+LIBRARY (expanded): filter chips (Playlist / Album / Artis / Favorit), sort menu (Terbaru / A-Z / Paling Sering Diputar), Pin playlist (sematan di atas), rename + delete user playlists, edit playlist (remove track, move up/down), playlist cover = pick 1 of 6 gradient colors.
+QUEUE: Now Playing "..." or queue icon opens Antrean screen — Sedang Diputar, Berikutnya Dari (source playlist/album), user-queued tracks; add-to-queue + "Putar Berikutnya" from every track row menu; remove from queue; "Bersihkan antrean".
+HISTORY & STATS: Recently Played persisted (max 50) shown on Home + Profile; Profile stats expanded: total plays, approx minutes listened (accumulate while playing), top 3 tracks; "Riwayat Putar" screen with clear-history.
+PLAYER EXTRAS: Sleep Timer in Now Playing menu (5/10/15/30/45/60 menit / akhir lagu, with active countdown state, cancels on pause-end); Equalizer button opens the Android system equalizer intent (AudioEffect.ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL, graceful toast if none); playback speed selector (0.8/1.0/1.25/1.5) applied to ExoPlayer; Share track/playlist via Android share intent (text); "Radio Lagu" from track menu (auto queue of same-genre tracks); "Tambah ke Playlist" from track menu.
+LYRICS: Now Playing "Lirik" button opens lyrics sheet — ORIGINAL demo lyrics written for this app (4-8 short lines per album, same lines per album is fine), current line highlighted by playback position fraction; label "Lirik demo".
+MADE-FOR-YOU generation: deterministic local logic from genre tags + play counts (document it in replica/architecture.md addendum).
+
+SHOULD (build if time without breaking the build): genre tag per track (assign from a fixed list: Elektronik, Akustik, Sinematik, Santai, Fokus, Malam — 16 tracks distributed); crossfade setting stored (0-12s) applied as ExoPlayer skip-silence/volume ramp approximation OR stored-only with honest note in report if not applied.
+COULD (list in features.csv as out-of-scope-with-reason, do NOT fake): Podcasts (needs a licensed/RSS catalogue), Audiobooks, Jam/Group Session & Connect-to-device (needs a server), AI DJ/AI Playlist (needs an AI backend).
+
+EXCLUDED — Spotify PREMIUM features, must NOT be built (list them in README + report): Download/offline mode, kualitas audio sangat tinggi/lossless tiers, antrean premium controls beyond free, mode offline. (Our app has no ads and no skip limits by nature — do not add fake "premium" upsell screens.)
+
+UI QUALITY BAR (Stephanie: "harus bagus"): white theme, violet accent, near-black text; Spotify-like information density and bold typography but original layout details; 8px spacing system; cards radius 12-16dp; every track gets a distinct seeded gradient cover (picsum seed per track already in v1 — keep, plus gradient fallback); custom adaptive app icon (white bg, violet play triangle + playlist lines, no Spotify marks); splash screen (white, icon + "My Playlist"); polished empty states in Indonesian for search/library/favorites/history; run replica-design contrast.py on tokens and record the result in the report; no placeholder "TODO" text anywhere in UI.
+
+BUILD: GitHub Actions stays the only APK build (assembleDebug + artifact "MyPlaylist-debug-apk"). This stage's push must end with a GREEN Actions run — if red, read the log, fix, re-push (max 3 iterations, then report honestly).
