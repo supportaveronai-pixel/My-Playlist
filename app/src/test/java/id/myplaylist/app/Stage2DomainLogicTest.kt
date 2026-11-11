@@ -79,7 +79,17 @@ class Stage2DomainLogicTest {
 
         // Discover mix should highlight zero-play tracks
         val discoverTrackIds = mixes[2].trackIds
-        assertTrue(discoverTrackIds.contains("track_16"))
+        assertEquals(6, discoverTrackIds.size)
+        discoverTrackIds.forEach { trackId ->
+            assertEquals(0, playCounts[trackId] ?: 0)
+        }
+        assertTrue(discoverTrackIds.contains("track_3"))
+
+        // Generation must be deterministic across repeated calls
+        val mixesAgain = MadeForYouGenerator.generateMadeForYou(tracks, playCounts)
+        for (i in mixes.indices) {
+            assertEquals(mixes[i].trackIds, mixesAgain[i].trackIds)
+        }
     }
 
     @Test
